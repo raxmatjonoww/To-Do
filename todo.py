@@ -3,7 +3,6 @@ from tkinter import messagebox
 
 tasks = []
 
-# Vazifani qo'shish
 def add_task():
     task = entry.get()
     if task != "":
@@ -13,7 +12,6 @@ def add_task():
     else:
         messagebox.showwarning("Ogohlantirish", "Vazifa matnini kiriting!")
 
-# Vazifani o'chirish
 def delete_task():
     try:
         selected_index = listbox.curselection()[0]
@@ -22,14 +20,12 @@ def delete_task():
     except IndexError:
         messagebox.showwarning("Ogohlantirish", "O'chirish uchun vazifani tanlang!")
 
-# Vazifalarni faylga saqlash
 def save_tasks():
     with open("tasks.txt", "w", encoding="utf-8") as f:
         for task in tasks:
             f.write(task + "\n")
     messagebox.showinfo("Ma'lumot", "Vazifalar saqlandi!")
 
-# Fayldan vazifalarni yuklash
 def load_tasks():
     try:
         with open("tasks.txt", "r", encoding="utf-8") as f:
@@ -40,18 +36,15 @@ def load_tasks():
     except FileNotFoundError:
         pass
 
-# Listbox'ni yangilash
 def update_listbox():
     listbox.delete(0, tk.END)
     for task in tasks:
         listbox.insert(tk.END, task)
 
-# Asosiy oynani yaratish
 root = tk.Tk()
 root.title("To-Do List Manager")
 root.geometry("400x400")
 
-# Kirish qismi
 entry = tk.Entry(root, width=30)
 entry.pack(pady=10)
 
@@ -64,11 +57,9 @@ delete_button.pack(pady=5)
 save_button = tk.Button(root, text="Vazifalarni saqlash", command=save_tasks)
 save_button.pack(pady=5)
 
-# Vazifalar ro'yxati
 listbox = tk.Listbox(root, width=50, height=15)
 listbox.pack(pady=10)
 
-# Dastur ishga tushganda fayldan vazifalarni yuklash
 load_tasks()
 
 root.mainloop()
